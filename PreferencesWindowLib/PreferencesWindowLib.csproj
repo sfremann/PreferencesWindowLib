@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <UseWPF>true</UseWPF>
+    <ImplicitUsings>enable</ImplicitUsings>
+
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+	  <PackageId>sfremann.PreferencesWindowLib</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>Sarah Frémann</Authors>
+    <PackageDescription>Simple WPF library for a modular preferences window (or settings, config... window)</PackageDescription>
+	  <PackageTags>wpf settings config preferences</PackageTags>
+    <RepositoryUrl>https://github.com/sfremann/PreferencesWindowLib</RepositoryUrl>
+	  <PackageLicenseExpression>MIT</PackageLicenseExpression>
+	  <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+</Project>
