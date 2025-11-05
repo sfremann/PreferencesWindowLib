@@ -5,7 +5,7 @@ using System.Windows;
 
 namespace PreferencesWindowLib.Interfaces
 {
-    internal interface IConfigDisplay
+    public interface IConfigDisplay
     {
         bool PropertyHasCustomEditor(string propertyName);
         UIElement GetCustomEditorForProperty(string propertyName);

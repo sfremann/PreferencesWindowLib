@@ -8,7 +8,7 @@
 
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
 	  <PackageId>sfremann.PreferencesWindowLib</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>Sarah Frémann</Authors>
     <PackageDescription>Simple WPF library for a modular preferences window (or settings, config... window)</PackageDescription>
 	  <PackageTags>wpf settings config preferences</PackageTags>
