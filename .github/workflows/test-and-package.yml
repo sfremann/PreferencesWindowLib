@@ -22,13 +22,15 @@ jobs:
 
     env:
       Solution_Name: PreferencesWindowLib.sln
-      Test_Project_Path: PreferencesWindowLib.Tests\PreferencesWindowLib.Tests.csproj
       
     steps:
     - name: Checkout
       uses: actions/checkout@v4
       with:
         fetch-depth: 0
+
+    - name: Copy README.md into project folder
+      run: cp README.md PreferencesWindowLib\
 
     # Install the .NET Core workload
     - name: Install .NET Core
@@ -46,7 +48,12 @@ jobs:
       env:
         Configuration: ${{ matrix.configuration }}
 
-   # Create package
+    # Build project DLLs for packing
+    - name: Build the application
+      if: github.ref_type == 'tag' && matrix.configuration == 'Release'
+      run: dotnet build --configuration ${{ matrix.configuration }}
+
+    # Create package
     - name: Pack the application
       if: github.ref_type == 'tag' && matrix.configuration == 'Release'
       run: dotnet pack --no-build --configuration Release
