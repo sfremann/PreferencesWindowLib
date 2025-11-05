@@ -1,3 +1,5 @@
+[![.NET Core Desktop](https://github.com/sfremann/PreferencesWindowLib/actions/workflows/test-and-package.yml/badge.svg)](https://github.com/sfremann/PreferencesWindowLib/actions/workflows/test-and-package.yml)
+
 # PreferencesWindowLib
 Simple WPF library for a modular preferences window (or settings, config... window)
 
