@@ -1,0 +1,58 @@
+# Publish package to GitHub Packages
+
+name: .NET Core Desktop
+
+on:
+  push:
+    branches: [ "main" ]
+    tags:
+      - 'v*'
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build:
+
+    strategy:
+      matrix:
+        configuration: [Debug, Release]
+
+    runs-on: windows-latest
+
+    env:
+      Solution_Name: PreferencesWindowLib.sln
+      Test_Project_Path: PreferencesWindowLib.Tests\PreferencesWindowLib.Tests.csproj
+      
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    # Install the .NET Core workload
+    - name: Install .NET Core
+      uses: actions/setup-dotnet@v4
+      with:
+        dotnet-version: 8.0.x
+
+    # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
+    - name: Setup MSBuild.exe
+      uses: microsoft/setup-msbuild@v2
+
+    # Restore the application to populate the obj folder with RuntimeIdentifiers
+    - name: Restore the application
+      run: msbuild $env:Solution_Name /t:Restore /p:Configuration=$env:Configuration
+      env:
+        Configuration: ${{ matrix.configuration }}
+
+   # Create package
+    - name: Pack the application
+      if: github.ref_type == 'tag' && matrix.configuration == 'Release'
+      run: dotnet pack --no-build --configuration Release
+
+    # Push package to GitHub Packages
+    - name: Push the package to GitHub Packages
+      if: github.ref_type == 'tag' && matrix.configuration == 'Release'
+      run: dotnet nuget push "**/*.nupkg" --source "https://nuget.pkg.github.com/${{ github.repository_owner }}/index.json" --skip-duplicate --api-key ${{ secrets.GITHUB_TOKEN }}
+
